@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karmegam Vadivel - Software Engineer</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://github.com/vkarmegam/vkarmegam.github.io/blob/master/imgs/rimage.png?raw=true">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts - Inter for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Global Reset and Box Sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Root Variables for Theming - Light Theme Defaults */
+        :root {
+            --primary-color: #4f46e5; /* Indigo-600 */
+            --secondary-color: #4338ca; /* Indigo-700 */
+            --accent-color: #6366f1; /* Indigo-500 */
+            --text-dark: #1f2937; /* Gray-900 */
+            --text-light: #6b7280; /* Gray-500 */
+            --bg-light: #f9fafb; /* Gray-50 */
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb; /* Gray-200 */
+            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); /* Indigo to Purple Gradient */
+            --shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+            --card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --primary-color: #818cf8; /* Indigo-300 */
+            --secondary-color: #6366f1; /* Indigo-500 */
+            --accent-color: #a78bfa; /* Purple-400 */
+            --text-dark: #f9fafb; /* White */
+            --text-light: #d1d5db; /* Gray-400 */
+            --bg-light: #1f2937; /* Gray-900 */
+            --bg-white: #111827; /* Gray-950 */
+            --border-color: #374151; /* Gray-700 */
+            --gradient: linear-gradient(135deg, #6366f1 0%, #a78bfa 100%); /* Brighter Indigo to Purple for Dark Mode */
+            --shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            --card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Inter', sans-serif; /* Modern font */
+            line-height: 1.7; /* Increased line height for readability */
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            transition: all 0.4s ease; /* Smooth transition for theme changes */
+        }
+
+        /* Page View Counter - Keep as is, or remove if not needed */
+        .page-counter {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            z-index: 1001;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        [data-theme="dark"] .page-counter {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-dark);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9); /* Slightly more transparent */
+            backdrop-filter: blur(12px); /* Stronger blur effect */
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        [data-theme="dark"] header {
+            background: rgba(17, 24, 39, 0.9);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1280px; /* Slightly wider max-width */
+            margin: 0 auto;
+        }
+
+        .logo-img {
+            height: 45px; /* Slightly larger logo */
+            width: auto;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 0 0 2px var(--primary-color); /* Subtle border effect */
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 4px var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem; /* Increased gap */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.2s ease;
+            position: relative;
+            padding: 0.25rem 0; /* Add padding for better hover area */
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px; /* Thicker underline */
+            bottom: -8px; /* Lower position */
+            left: 50%;
+            background: var(--gradient);
+            border-radius: 2px; /* Rounded underline */
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem; /* Increased gap */
+        }
+
+        .theme-toggle {
+            background: var(--bg-light); /* Use light background for button */
+            border: 1px solid var(--border-color); /* Subtle border */
+            color: var(--text-dark);
+            padding: 0.6rem; /* Larger padding */
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 45px; /* Larger button */
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: rotate(15deg); /* Subtle rotation on hover */
+        }
+
+        .mobile-menu {
+            display: none; /* Hidden on desktop */
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px; /* Add padding for easier tapping */
+        }
+
+        .mobile-menu span {
+            width: 30px; /* Slightly wider */
+            height: 4px; /* Thicker */
+            background: var(--text-dark);
+            margin: 4px 0; /* Increased margin */
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px; /* Space for fixed header */
+            padding-bottom: 20px; /* Ensure content isn't cut off at bottom */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* SVG for subtle grain texture */
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1.2" fill="white" opacity="0.15"/><circle cx="75" cy="75" r="1.2" fill="white" opacity="0.15"/><circle cx="50" cy="10" r="0.8" fill="white" opacity="0.1"/><circle cx="20" cy="60" r="0.8" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.4; /* Slightly more visible grain */
+        }
+
+        .hero-content {
+            max-width: 900px; /* Wider content area */
+            z-index: 2;
+            position: relative;
+            animation: fadeInUp 1s ease;
+            padding: 0 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align text to left */
+            text-align: left; /* Ensure text is left-aligned */
+        }
+
+        .hero h1 {
+            font-size: 3.5rem; /* Larger font size for impact */
+            margin-bottom: 0.8rem; /* Increased margin */
+            font-weight: 800; /* Bolder font */
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem; /* Larger subtitle */
+            margin-bottom: 2rem; /* More space */
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .hero .description-text {
+            font-size: 1.1rem; /* Larger body text */
+            opacity: 0.85;
+            margin-bottom: 1.5rem; /* More space between paragraphs */
+        }
+        .hero .description-text strong {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem; /* Increased gap between buttons */
+            justify-content: flex-start; /* Align buttons to the left */
+            width: 100%;
+            margin-top: 2.5rem; /* More space from description */
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 30px; /* Larger padding */
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem; /* Slightly larger font size */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            min-width: 200px; /* Ensure consistent width */
+            justify-content: center;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-5px); /* More pronounced lift */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 5%; /* Increased padding for more breathing room */
+            max-width: 1280px; /* Wider max-width */
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem; /* More space */
+        }
+
+        .section-title h2 {
+            font-size: 3rem; /* Larger title */
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .section-title p {
+            font-size: 1.2rem; /* Larger subtitle */
+            color: var(--text-light);
+            max-width: 700px; /* Wider text area */
+            margin: 0 auto;
+        }
+
+        /* Professional Summary Section */
+        .professional-summary-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem; /* Increased gap */
+            align-items: center;
+        }
+
+        .professional-summary-text h3 {
+            font-size: 2.2rem; /* Larger heading */
+            margin-bottom: 1.2rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .professional-summary-text p {
+            margin-bottom: 1.2rem;
+            color: var(--text-light);
+            font-size: 1.15rem; /* Slightly larger text */
+            line-height: 1.8;
+        }
+
+        .quick-facts {
+            margin-top: 2rem; /* More space */
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 20px; /* More rounded corners */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            box-shadow: var(--shadow);
+        }
+        .quick-facts:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-hover-shadow);
+        }
+        .quick-facts h4 {
+            font-size: 1.4rem; /* Larger heading */
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .quick-facts ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .quick-facts li {
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .quick-facts li::before {
+            content: '•'; /* Custom bullet */
+            color: var(--accent-color);
+            font-size: 1.2em;
+            line-height: 1;
+        }
+        .quick-facts li strong {
+            color: var(--primary-color);
+        }
+
+        /* Skills & Certifications Section Styling (Card-like) */
+        .skills-grid, .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Wider minmax */
+            gap: 2rem; /* Increased gap */
+            margin-top: 2rem;
+        }
+
+        .skill-category, .certification-card {
+            background: var(--bg-white);
+            border-radius: 20px; /* More rounded corners */
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .skill-category:hover, .certification-card:hover {
+            transform: translateY(-12px); /* More pronounced lift */
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .skill-category .card-header, .certification-card .card-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem 2rem; /* Increased padding */
+            display: flex;
+            align-items: center;
+            gap: 1rem; /* Increased gap */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: 700;
+        }
+
+        .skill-category .card-header i, .certification-card .card-header i {
+            font-size: 1.8rem; /* Larger icon */
+        }
+
+        .skill-category .card-content, .certification-card .card-content {
+            padding: 2rem; /* Increased padding */
+            flex-grow: 1;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem; /* Increased gap */
+        }
+
+        .skill-tag {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 0.6rem 1.2rem; /* Larger padding */
+            border-radius: 10px; /* Slightly less rounded for tags */
+            font-size: 0.95rem; /* Slightly larger font size */
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tooltip for skill tags */
+        .skill-tag[data-tooltip]:hover::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-15px); /* Adjust for spacing */
+            background-color: var(--text-dark);
+            color: white;
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .skill-tag[data-tooltip]:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-5px);
+            border-width: 6px; /* Larger triangle */
+            border-style: solid;
+            border-color: var(--text-dark) transparent transparent transparent;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .skill-tag[data-tooltip]:hover::before,
+        .skill-tag[data-tooltip]:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-8px); /* Final position for tooltip */
+        }
+
+        /* Certifications section specific styling */
+        .certification-card .course-title {
+            font-weight: 600; /* Medium bold */
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+            font-size: 1.15rem; /* Slightly larger font size */
+        }
+
+        .certification-card .course-info {
+            color: var(--text-light);
+            font-size: 0.95rem; /* Slightly larger font size */
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            margin-top: 2rem;
+            padding-left: 30px; /* More space for the vertical line */
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px; /* Thicker line */
+            background: var(--gradient);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem; /* More space between items */
+            width: calc(100% - 60px); /* Adjust width */
+            margin-left: 60px; /* Push content to the right of the line */
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -37px; /* Position marker on the left of the content */
+            width: 18px; /* Larger marker */
+            height: 18px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 4px solid var(--bg-white); /* Thicker white border */
+            box-shadow: 0 0 0 4px var(--accent-color); /* Outer shadow with accent color */
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: var(--bg-white);
+            padding: 2rem; /* Increased padding */
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-color);
+            font-size: 1.6rem; /* Larger font size */
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+
+        .timeline-content .company {
+            font-weight: 600; /* Medium bold */
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+            font-size: 1.05rem;
+        }
+
+        .timeline-content .duration {
+            color: var(--text-light);
+            font-size: 0.95rem; /* Slightly larger font size */
+            margin-bottom: 1.2rem;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-content li {
+            position: relative;
+            padding-left: 1.5rem; /* More padding */
+            margin-bottom: 0.6rem;
+            color: var(--text-light);
+            font-size: 1rem; /* Slightly larger font size */
+        }
+
+        .timeline-content li::before {
+            content: '➤'; /* Custom bullet point */
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 0.9rem; /* Larger bullet */
+            top: 4px; /* Adjust vertical alignment */
+        }
+        .timeline-content li strong {
+            color: var(--primary-color);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Wider minmax for projects */
+            gap: 2rem; /* Increased gap */
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .project-header {
+            padding: 2rem; /* Increased padding */
+            background: var(--gradient);
+            color: white;
+        }
+
+        .project-header h3 {
+            font-size: 1.6rem; /* Larger font size */
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .project-content {
+            padding: 2rem; /* Increased padding */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem; /* Slightly larger font size */
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem; /* Increased gap */
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--bg-light);
+            color: var(--primary-color);
+            padding: 0.4rem 0.9rem; /* Larger padding */
+            border-radius: 15px;
+            font-size: 0.85rem; /* Slightly larger font size */
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-links {
+            margin-top: 1.5rem; /* More space */
+            display: flex;
+            gap: 1rem; /* Increased gap */
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem; /* Larger padding */
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.95rem; /* Slightly larger font size */
+            font-weight: 500;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-link:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* LinkedIn Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+            backdrop-filter: blur(8px); /* Stronger blur effect */
+            display: flex; /* Use flexbox for centering */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-white);
+            padding: 0;
+            border-radius: 25px; /* More rounded */
+            width: 90%;
+            max-width: 450px; /* Slightly wider */
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            animation: modalSlideIn 0.4s ease-out; /* Slightly longer animation */
+            overflow: hidden; /* Ensure rounded corners apply to header */
+        }
+
+        .modal-header {
+            background: var(--gradient);
+            padding: 2.5rem; /* More padding */
+            text-align: center;
+            color: white;
+            border-radius: 25px 25px 0 0;
+            position: relative;
+        }
+
+        .modal-header .close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            color: white;
+            font-size: 1.8rem; /* Larger close icon */
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .modal-header .close:hover {
+            transform: scale(1.1);
+        }
+
+        .modal-header img {
+            width: 90px; /* Larger image */
+            height: 90px;
+            border-radius: 50%;
+            border: 5px solid white; /* Thicker border */
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.3); /* Inner glow */
+        }
+
+        .modal-header h3 {
+            font-size: 1.8rem; /* Larger heading */
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .modal-header p {
+            opacity: 0.95;
+            font-size: 1.1rem;
+        }
+
+        .modal-body {
+            padding: 2.5rem; /* More padding */
+            text-align: center;
+        }
+
+        .linkedin-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0; /* More margin */
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem; /* Larger number */
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .linkedin-btn {
+            background: #0077b5;
+            color: white;
+            padding: 1.2rem 2.5rem; /* Larger padding */
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 119, 181, 0.3);
+        }
+
+        .linkedin-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 119, 181, 0.4);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .contact-content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem; /* More space */
+            max-width: 1000px; /* Wider wrapper */
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px); /* Start further down */
+            transition: opacity 0.9s ease-out, transform 0.9s ease-out; /* Longer animation */
+        }
+
+        .contact-content-wrapper.fade-in-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 320px; /* Slightly wider min-width */
+            padding: 2.5rem; /* More padding */
+            background: var(--bg-white);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            text-align: left;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 2.5rem;
+            font-size: 1.8rem; /* Larger heading */
+            font-weight: 700;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem; /* More space */
+            margin-bottom: 1.8rem; /* More space */
+            padding: 1.2rem; /* Larger padding */
+            background: var(--bg-light);
+            border-radius: 15px; /* More rounded */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .contact-item:hover {
+            transform: translateX(15px); /* More pronounced slide */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-item i {
+            font-size: 1.4rem; /* Larger icon */
+            color: var(--primary-color);
+            width: 25px; /* Fixed width for icon alignment */
+        }
+
+        .contact-item a, .contact-item span {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-image-container {
+            flex: 1;
+            min-width: 280px; /* Slightly wider min-width */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-image:hover {
+            transform: scale(1.03);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2.5rem; /* Slightly higher */
+            right: 2.5rem; /* Slightly more to the right */
+            width: 55px; /* Larger button */
+            height: 55px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.3rem; /* Larger icon */
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-5px); /* Lift slightly when visible */
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-8px); /* More pronounced lift */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark); /* Darker footer */
+            color: white;
+            text-align: center;
+            padding: 2.5rem 5%; /* More padding */
+            font-size: 0.95rem;
+        }
+
+        [data-theme="dark"] footer {
+            background: #000;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem; /* More space */
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px; /* Larger icons */
+            height: 55px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.4rem; /* Larger icon */
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px) rotate(5deg); /* Lift and slight rotate */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-80px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.9s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 85px; /* Below header */
+                left: 0;
+                width: 100%;
+                background: var(--bg-white);
+                flex-direction: column;
+                padding: 2.5rem;
+                box-shadow: var(--shadow);
+                border-top: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-content {
+                align-items: center;
+                text-align: center;
+            }
+
+            .hero-text-content {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                width: auto;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .experience-timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 40px);
+                margin-left: 40px;
+            }
+
+            .timeline-item:nth-child(even) {
+                margin-left: 40px;
+            }
+
+            .timeline-item::before {
+                left: -27px !important;
+            }
+
+            .contact-content-wrapper {
+                flex-direction: column;
+            }
+
+            section {
+                padding: 4rem 5%; /* Adjust section padding */
+            }
+
+            .nav-controls {
+                order: 3;
+            }
+
+            .mobile-menu {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid,
+            .skills-grid,
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+
+            .btn {
+                width: 100%; /* Full width buttons on small screens */
+            }
+
+            .logo-img {
+                height: 38px; /* Smaller logo on very small screens */
+            }
+
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <!-- Logo Image (Clickable to Home) -->
+            <img src="https://github.com/vkarmegam/vkarmegam.github.io/blob/master/imgs/profile.jpg?raw=true" alt="Karmegam Vadivel Logo" class="logo-img" onclick="scrollToSection('home')">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#professional-summary">Professional Summary</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                <div class="mobile-menu" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text-content">
+                <h1>Karmegam Vadivel</h1>
+                <p class="subtitle">Sr. Software Engineer | Golang </p>
+                <p class="description-text">
+                    Passionate Software Engineer with 2+ years of expertise in Golang, microservices, and cloud platforms. Specialized in building scalable backend solutions and leading development teams to deliver exceptional results.
+                </p>
+            </div>
+            <div class="cta-buttons">
+                <button class="btn btn-secondary" onclick="openLinkedInModal()">
+                    <i class="fab fa-linkedin"></i> Get In Touch
+                </button>
+                <a href="mailto:vkarmegam97@gmail.com" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i> Email Me
+                </a>
+                <a href="https://github.com/vkarmegam/vkarmegam.github.io/raw/master/imgs/Karmegam_V_CV.pdf" download="Karmegam_V_CV.pdf" class="btn btn-secondary">
+                    <i class="fas fa-download"></i> Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Summary Section -->
+    <section id="professional-summary">
+        <div class="section-title">
+            <h2>Professional Summary</h2>
+            <p>A concise overview of my expertise and career.</p>
+        </div>
+        <div class="professional-summary-content">
+            <div class="professional-summary-text">
+                <h3>Professional Overview</h3>
+                <p>
+                    Software engineer with expertise in backend development, system architecture, and team leadership.
+                </p>
+                <p>
+                    As a <strong>Senior Software Engineer</strong> with over two years of specialized experience, I have established myself as a reliable technical leader in backend development and microservices architecture. My journey from academia to industry leadership demonstrates a commitment to continuous learning and technical excellence.
+                </p>
+                <p>
+                    Currently at <strong>Algomox Private Limited</strong>, I lead the development of critical infrastructure platforms, including Windows/Linux patch management systems and Kubernetes monitoring solutions. My technical expertise spans Golang development, cloud platforms, and database optimization, with a particular focus on building scalable, production-ready systems.
+                </p>
+                <p>
+                    My background in education has uniquely positioned me to excel in <strong>mentoring junior developers</strong>, conducting comprehensive code reviews, and translating complex technical concepts into actionable solutions. I am passionate about building reliable software that exceeds performance expectations and drives business value.
+                </p>
+                <div class="quick-facts">
+                    <h4>Quick Facts</h4>
+                    <ul>
+                        <li><strong>Location:</strong> Bengaluru, Karnataka</li>
+                        <li><strong>Experience:</strong> 2+ Years</li>
+                        <li><strong>Education:</strong> MCA, Tamil Nadu Open University</li>
+                        <li><strong>Specialization:</strong> Backend Engineering</li>
+                        <li><strong>Languages:</strong> English, Tamil</li>
+                        <li><strong>Availability:</strong> Open to opportunities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-title">
+            <h2>Work Experience</h2>
+            <p>My professional journey and significant contributions</p>
+        </div>
+        <div class="experience-timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Sr. Software Engineer - L2</h3>
+                    <p class="company">Algomox Private Limited, Bengaluru</p>
+                    <p class="duration">October 2023 - Present</p>
+                    <ul>
+                        <li>Led the development of a Windows and Linux Patch Management platform integrated with <strong>AIOps</strong> using <strong>Golang</strong>, <strong>WebSockets</strong>, and <strong>NATS messaging</strong>, streamlining patch management processes across distributed environments.</li>
+                        <li>Led the development of a <strong>Kubernetes monitoring platform</strong> using <strong>Golang</strong>, integrated with <strong>AIOps</strong>, automating monitoring tasks, optimizing performance, and providing advanced analytics for Kubernetes clusters to ensure high availability across distributed environments, working on both backend development with Golang and frontend development with Angular and TypeScript.</li>
+                        <li>Designed and implemented an automation solution for integrating <strong>Azure Active Directory (Azure AD)</strong> with On-Premises Active Directory (AD) using <strong>Microsoft Graph API</strong> and <strong>REST APIs</strong>, reducing manual intervention and improving system integration.</li>
+                        <li>Played a key role in resolving critical production issues, ensuring high system availability and reducing downtime for a seamless user experience.</li>
+                        <li>Implemented proactive monitoring and alerting systems using <strong>Prometheus</strong>, enabling early detection of potential issues and improving system reliability.</li>
+                        <li>Mentored junior developers through code reviews, fostering a collaborative and learning-focused environment to boost team productivity and code quality.</li>
+                        <li>Optimized <strong>Cassandra</strong> database queries and data storage processes.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Software Engineer - L1</h3>
+                    <p class="company">Algomox Private Limited, Bengaluru</p>
+                    <p class="duration">November 2022 - October 2023</p>
+                    <ul>
+                        <li>Developed and maintained <strong>Golang-based backend services</strong> and APIs for Algomox's core applications, focusing on scalability and performance.</li>
+                        <li>Worked collaboratively with cross-functional teams, including front-end developers, product managers, and DevOps engineers, to deliver integrated solutions.</li>
+                        <li>Wrote comprehensive unit tests, ensuring high code quality and reducing production issues, contributing to improved system stability.</li>
+                        <li>Developed an automated tool for enhancing firewall reporting capabilities in <strong>PFsense</strong>, streamlining network security operations and reporting.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Instructor</h3>
+                    <p class="company">Skill Development Centre (RKMPTC), Chennai</p>
+                    <p class="duration">July 2020 - October 2022</p>
+                    <ul>
+                        <li>Conducted training sessions on <strong>ZOHO Creator</strong>, <strong>ZOHO MDM</strong>, and <strong>ZOHO Sites</strong>, empowering students and professionals to create custom applications, manage mobile devices, and build websites using ZOHO's suite of tools.</li>
+                        <li>Mentored students in project-based learning, fostering their problem-solving abilities and technical acumen.</li>
+                        <li>Managed server administration and network monitoring, ensuring system performance and security for training environments.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="section-title">
+            <h2>Education</h2>
+            <p>My academic background and qualifications</p>
+        </div>
+        <div class="experience-timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Master of Computer Applications (MCA)</h3>
+                    <p class="company">Tamil Nadu Open University, Chennai</p>
+                    <p class="duration">June 2018 - May 2020</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Bachelor of Computer Applications (BCA)</h3>
+                    <p class="company">Periyar University, SVMC, Uthangarai</p>
+                    <p class="duration">June 2014 - April 2017</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-title">
+            <h2>Technical Skills</h2>
+            <p>A comprehensive overview of my technical expertise and proficiencies</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <div class="card-header">
+                    <i class="fas fa-code"></i> Programming Languages
+                </div>
+                <div class="card-content">
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-tooltip="Proficient in building high-performance backend systems.">Golang</span>
+                        <span class="skill-tag" data-tooltip="Experienced in data analysis, scripting, and web development.">Python</span>
+                        <span class="skill-tag" data-tooltip="Solid understanding of web interactivity and frontend logic.">JavaScript</span>
+                        <span class="skill-tag" data-tooltip="Used for scalable and maintainable large-scale applications.">TypeScript</span>
+                        <span class="skill-tag" data-tooltip="Skilled in database querying and management.">SQL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="card-header">
+                    <i class="fas fa-server"></i> Backend & APIs
+                </div>
+                <div class="card-content">
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-tooltip="Framework for building high-performance web applications in Go.">Gin Framework</span>
+                        <span class="skill-tag" data-tooltip="Designing and implementing robust RESTful APIs.">REST APIs</span>
+                        <span class="skill-tag" data-tooltip="Developing scalable and independent services.">Microservices</span>
+                        <span class="skill-tag" data-tooltip="Real-time communication for interactive applications.">WebSockets</span>
+                        <span class="skill-tag" data-tooltip="Messaging system for distributed applications.">NATS</span>
+                        <span class="skill-tag" data-tooltip="Web framework for Python backend development.">Flask</span>
+                        <span class="skill-tag" data-tooltip="Managing concurrent operations for efficiency.">Concurrency</span>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="card-header">
+                    <i class="fas fa-database"></i> Databases
+                </div>
+                <div class="card-content">
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-tooltip="NoSQL database for high-volume, distributed data.">Cassandra</span>
+                        <span class="skill-tag" data-tooltip="Relational database management and querying.">SQL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="card-header">
+                    <i class="fas fa-cloud"></i> Cloud & DevOps
+                </div>
+                <div class="card-content">
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-tooltip="Experience with AWS compute, storage, and serverless services.">AWS (EC2, S3, Lambda)</span>
+                        <span class="skill-tag" data-tooltip="Containerization for consistent environments.">Docker</span>
+                        <span class="skill-tag" data-tooltip="Orchestration for containerized applications.">Kubernetes</span>
+                        <span class="skill-tag" data-tooltip="Scripting for automation in Linux environments.">Bash</span>
+                        <span class="skill-tag" data-tooltip="Scripting for automation in Windows environments.">Powershell</span>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="card-header">
+                    <i class="fas fa-chart-line"></i> Monitoring & Tools
+                </div>
+                <div class="card-content">
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-tooltip="System monitoring and alerting toolkit.">Prometheus</span>
+                        <span class="skill-tag" data-tooltip="Version control for collaborative development.">Git</span>
+                        <span class="skill-tag" data-tooltip="Platform for code hosting and collaboration.">GitHub</span>
+                        <span class="skill-tag" data-tooltip="Web-based Git repository manager.">GitLab</span>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <div class="card-header">
+                    <i class="fas fa-brain"></i> Machine Learning & Data
+                </div>
+                <div class="card-content">
+                    <div class="skill-tags">
+                        <span class="skill-tag" data-tooltip="Fundamental concepts of machine learning algorithms.">Basics of ML</span>
+                        <span class="skill-tag" data-tooltip="Analyzing and visualizing data using Python libraries.">Data Analysis (Python)</span>
+                        <span class="skill-tag" data-tooltip="Numerical operations with arrays and matrices.">Numpy</span>
+                        <span class="skill-tag" data-tooltip="Creating static, interactive, and animated visualizations.">Matplotlib</span>
+                        <span class="skill-tag" data-tooltip="Statistical data visualization.">Seaborn</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="section-title">
+            <h2>Featured Projects</h2>
+            <p>Showcasing some of my most impactful and innovative projects</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Azure AD Integration Platform</h3>
+                </div>
+                <div class="project-content">
+                    <p>
+                        Spearheaded the integration of Azure AD with on-premises AD using Microsoft Graph API
+                        and REST APIs. Automated user management operations, significantly reducing manual workload
+                        and improving system integration efficiency.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Golang</span>
+                        <span class="tech-tag">Microsoft Graph API</span>
+                        <span class="tech-tag">REST APIs</span>
+                        <span class="tech-tag">Azure AD</span>
+                    </div>
+                    <div class="project-links">
+                        <!-- Add project links if available -->
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>CreatorEdge Enhanced by Gemini AI</h3>
+                </div>
+                <div class="project-content">
+                    <p>
+                        Developed an AI-powered tool that delivers real-time analytics and data-driven
+                        insights for content creators. Optimized content strategies using Gemini API and
+                        predictive analysis to drive engagement and performance.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Gemini API</span>
+                        <span class="tech-tag">AI</span>
+                        <span class="tech-tag">Advanced Analytics</span>
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Predictive Analysis</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://youtu.be/ngc57WlpL9g?si=7MPi1Pusxa3OqrM9" target="_blank" class="project-link">
+                            <i class="fab fa-youtube"></i> Watch Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>DesignFusion: AI-Driven Interior Design</h3>
+                </div>
+                <div class="project-content">
+                    <p>
+                        Created an AI-driven interior design app providing personalized recommendations and
+                        3D visualizations. Simplified the design process with data-driven insights tailored
+                        to user preferences and space requirements.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Gemini API</span>
+                        <span class="tech-tag">AI</span>
+                        <span class="tech-tag">3D Visualization</span>
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Machine Learning</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://youtu.be/tFa5tL5rbE0?si=jYqSAa4yjSoz-zrY" target="_blank" class="project-link">
+                            <i class="fab fa-youtube"></i> Watch Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Windows & Linux Patch Management Platform</h3>
+                </div>
+                <div class="project-content">
+                    <p>
+                        Led the development of a comprehensive patch management platform integrated with AIOps
+                        using Golang, WebSockets, and NATS messaging. Streamlined patch management processes
+                        across distributed environments.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Golang</span>
+                        <span class="tech-tag">WebSockets</span>
+                        <span class="tech-tag">NATS</span>
+                        <span class="tech-tag">AIOps</span>
+                        <span class="tech-tag">System Management</span>
+                    </div>
+                    <div class="project-links">
+                        <!-- Add project links if available -->
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Kubernetes Monitoring Platform</h3>
+                </div>
+                <div class="project-content">
+                    <p>
+                        Developed a comprehensive Kubernetes monitoring platform integrated with AIOps,
+                        automating monitoring tasks, optimizing performance, and providing advanced analytics
+                        for Kubernetes clusters to ensure high availability.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Golang</span>
+                        <span class="tech-tag">Kubernetes</span>
+                        <span class="tech-tag">AIOps</span>
+                        <span class="tech-tag">Monitoring</span>
+                        <span class="tech-tag">Analytics</span>
+                    </div>
+                    <div class="project-links">
+                        <!-- Add project links if available -->
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>PFsense Firewall Enhancement Tool</h3>
+                </div>
+                <div class="project-content">
+                    <p>
+                        Developed an automated tool for enhancing firewall reporting capabilities in PFsense,
+                        streamlining network security operations and reporting processes for better security
+                        management and compliance.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Network Security</span>
+                        <span class="tech-tag">PFsense</span>
+                        <span class="tech-tag">Automation</span>
+                        <span class="tech-tag">Reporting</span>
+                    </div>
+                    <div class="project-links">
+                        <!-- Add project links if available -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <div class="section-title">
+            <h2>Certifications</h2>
+            <p>Enhancing my skills through specialized training</p>
+        </div>
+        <div class="certifications-grid">
+            <div class="certification-card">
+                <div class="card-header">
+                    <i class="fas fa-award"></i> Softlogic Academy
+                </div>
+                <div class="card-content">
+                    <p class="course-title">Machine Learning</p>
+                    <p class="course-info">Certification ID: SLADS072020</p>
+                </div>
+            </div>
+            <div class="certification-card">
+                <div class="card-header">
+                    <i class="fas fa-award"></i> Softlogic Academy
+                </div>
+                <div class="card-content">
+                    <p class="course-title">Python Programming</p>
+                    <p class="course-info">Certification ID: SLADS072020</p>
+                </div>
+            </div>
+            <div class="certification-card">
+                <div class="card-header">
+                    <i class="fas fa-award"></i> Cisco Networking Academy
+                </div>
+                <div class="card-content">
+                    <p class="course-title">Introduction to Networks</p>
+                    <p class="course-info">Certification ID: 56362465</p>
+                </div>
+            </div>
+            <div class="certification-card">
+                <div class="card-header">
+                    <i class="fas fa-award"></i> Cisco Networking Academy
+                </div>
+                <div class="card-content">
+                    <p class="course-title">Routing and Switching</p>
+                    <p class="course-info">Certification ID: 56362465</p>
+                </div>
+            </div>
+            <div class="certification-card">
+                <div class="card-header">
+                    <i class="fas fa-award"></i> Cisco Networking Academy
+                </div>
+                <div class="card-content">
+                    <p class="course-title">Scaling Networks</p>
+                    <p class="course-info">Certification ID: 56362465</p>
+                </div>
+            </div>
+            <div class="certification-card">
+                <div class="card-header">
+                    <i class="fas fa-award"></i> Cisco Networking Academy
+                </div>
+                <div class="card-content">
+                    <p class="course-title">Connecting Networks</p>
+                    <p class="course-info">Certification ID: 56362465</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+            <p>Feel free to reach out for collaborations or opportunities</p>
+        </div>
+        <div class="contact-content-wrapper">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:vkarmegam97@gmail.com">vkarmegam97@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <a href="tel:+918344355512">+91-8344355512</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/karmegam-v" target="_blank">LinkedIn Profile</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Bengaluru, India</span>
+                </div>
+            </div>
+            <div class="contact-image-container">
+                <img src="https://github.com/vkarmegam/vkarmegam.github.io/blob/master/imgs/my.jpg?raw=true" alt="Karmegam Vadivel" class="contact-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/karmegam-v" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/vkarmegam" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.instagram.com/karmegam_v/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:vkarmegam97@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy; 2025 Karmegam Vadivel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- LinkedIn Modal -->
+    <div id="linkedinModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeLinkedInModal()">&times;</span>
+                <img src="https://github.com/vkarmegam/vkarmegam.github.io/blob/master/imgs/profile.jpg?raw=true" alt="Karmegam Vadivel" style="width: 90px; height: 90px; border-radius: 50%; border: 5px solid white; margin-bottom: 1.5rem;">
+                <h3>Karmegam Vadivel</h3>
+                <p>Sr. Software Engineer | Golang </p>
+            </div>
+            <div class="modal-body">
+                <div class="linkedin-stats">
+                    <div class="stat">
+                        <span class="stat-number">300+</span>
+                        <span class="stat-label">Connections</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">2.9+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                </div>
+                <p>Connect with me on LinkedIn to explore professional opportunities and collaborations.</p>
+                <a href="https://www.linkedin.com/in/karmegam-v" target="_blank" class="linkedin-btn">
+                    <i class="fab fa-linkedin"></i> View Profile
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initial theme setup based on user preference or default
+        document.addEventListener('DOMContentLoaded', () => {
+            const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+            const currentTheme = localStorage.getItem("theme");
+
+            if (currentTheme) {
+                document.body.setAttribute('data-theme', currentTheme);
+                updateThemeIcon(currentTheme);
+            } else if (prefersDarkScheme.matches) {
+                document.body.setAttribute('data-theme', 'dark');
+                updateThemeIcon('dark');
+            } else {
+                document.body.removeAttribute('data-theme');
+                updateThemeIcon('light');
+            }
+
+            // Open LinkedIn modal on page load
+            openLinkedInModal();
+        });
+
+        // Function to update the theme icon
+        function updateThemeIcon(theme) {
+            const themeIcon = document.getElementById('theme-icon');
+            if (theme === 'dark') {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+
+        // Smooth Scrolling for navigation links
+        document.querySelectorAll('nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                if (window.innerWidth <= 768) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Theme Toggle functionality (Light/Dark Mode)
+        function toggleTheme() {
+            const body = document.body;
+            let newTheme;
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                newTheme = 'light';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                newTheme = 'dark';
+            }
+            localStorage.setItem("theme", newTheme); // Save theme preference
+            updateThemeIcon(newTheme);
+        }
+
+        // Mobile Menu Toggle functionality
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Back to Top Button Visibility based on scroll position
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        // Scroll to Top functionality
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Scroll to Section function for logo click
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // LinkedIn Modal functions
+        function openLinkedInModal() {
+            document.getElementById('linkedinModal').style.display = 'flex'; // Use flex to center
+        }
+
+        function closeLinkedInModal() {
+            document.getElementById('linkedinModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('linkedinModal');
+            if (event.target == modal) {
+                closeLinkedInModal();
+            }
+        }
+
+        // Intersection Observer for Contact Info fade-in
+        const contactInfoWrapper = document.querySelector('.contact-content-wrapper');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    contactInfoWrapper.classList.add('fade-in-up');
+                    observer.unobserve(contactInfoWrapper); // Stop observing once animated
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+        observer.observe(contactInfoWrapper);
+    </script>
+</body>
+</html>
